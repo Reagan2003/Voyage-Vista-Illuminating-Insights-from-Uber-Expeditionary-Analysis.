@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Exploratory data analysis for Uber trips | Kaggle</title>
+  <meta charset="utf-8" />
+    <meta name="robots" content="index, follow" />
+  <meta name="description" content="Explore and run machine learning code with Kaggle Notebooks | Using data from My Uber Drives" />
+  <meta name="turbolinks-cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <meta name="theme-color" content="#008ABC" />
+  <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" type="text/javascript">
+    window["pageRequestStartTime"] = 1697017464246;
+    window["pageRequestEndTime"] = 1697017465339;
+    window["initialPageLoadStartTime"] = new Date().getTime();
+  </script>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous" /><link rel="preconnect" href="https://stats.g.doubleclick.net" /><link rel="preconnect" href="https://storage.googleapis.com" /><link rel="preconnect" href="https://apis.google.com" />
+  <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="manifest" href="/static/json/manifest.json" crossorigin="use-credentials">
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/icon?family=Google+Material+Icons&display=block"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i&display=swap"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/icon?family=Google+Material+Icons&display=block"
+    rel="stylesheet" media="print" id="async-google-font-1" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i&display=swap"
+    rel="stylesheet" media="print" id="async-google-font-2" />
+  <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" type="text/javascript">
+    const styleSheetIds = ["async-google-font-1", "async-google-font-2"];
+    styleSheetIds.forEach(function (id) {
+      document.getElementById(id).addEventListener("load", function() {
+        this.media = "all";
+      });
+    });
+  </script>
+
+    <link rel="canonical" href="/code/mohamed08/exploratory-data-analysis-for-uber-trips" />
+    <link rel="stylesheet" type="text/css" href="/static/assets/vendor.css?v=dd064d680b3ca5c8a76b" />
+    <link rel="stylesheet" type="text/css" href="/static/assets/app.css?v=7dd02baeefe6b778860b" />
+  
+    
+ 
+      <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==">
+        try{(function(a,s,y,n,c,h,i,d,e){d=s.createElement("style");
+        d.appendChild(s.createTextNode(""));s.head.appendChild(d);d=d.sheet;
+        y=y.map(x => d.insertRule(x + "{ opacity: 0 !important }"));
+        h.start=1*new Date;h.end=i=function(){y.forEach(x => x<d.cssRules.length ? d.deleteRule(x) : {})};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+        })(window,document,['.site-header-react__nav'],'dataLayer',2000,{'GTM-52LNT9S':true});}catch(ex){}
+    </script>
+    <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7QHS60L4Q', {
+            'optimize_id': 'GTM-52LNT9S',
+            'displayFeaturesTask': null,
+            'send_page_view': false,
+            'content_group1': 'Notebooks'
+        });
+    </script>
+    <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" async src="https://www.googletagmanager.com/gtag/js?id=G-T7QHS60L4Q"></script>
+
+  
+    
+    <meta name="og:url" content="https://kaggle.com/code/mohamed08/exploratory-data-analysis-for-uber-trips" />
+    <meta property="og:title" content="Exploratory data analysis for Uber trips" />
+    <meta property="og:description" content="Explore and run machine learning code with Kaggle Notebooks | Using data from My Uber Drives" />
+    <meta property="og:type" content="website" />
+    <meta name="og:image" content="https://storage.googleapis.com/kaggle-avatars/thumbnails/1132925-fb.jpg" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@kaggledatasets" />
+
+
+  <meta name="twitter:site" content="@Kaggle" /> 
+  
+    
+    <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" type="application/ld+json">{"@context":"http://schema.org/","@type":"Article","author":{"@type":"Person","name":"mohamed08","sameAs":"/mohamed08"},"headline":"Exploratory data analysis for Uber trips","url":"https://www.kaggle.com/code/mohamed08/exploratory-data-analysis-for-uber-trips","dateModified":"2018-05-30T15:55:44.1233333Z","datePublished":"2018-05-30T15:55:44.1233333Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kaggle.com/code/mohamed08/exploratory-data-analysis-for-uber-trips"},"publisher":{"@type":"Organization","name":"Kaggle","sameAs":"https://www.kaggle.com","logo":{"type":"ImageObject","url":"https://www.kaggle.com/static/images/site-logo.png"}},"image":["https://storage.googleapis.com/kaggle-avatars/thumbnails/1132925-fb.jpg"]}</script>
+
+
+  
+    
+        <link rel="alternate" type="application/json+oembed"
+          href="https://www.kaggle.com/oembed/kernel?url=https%3A%2F%2Fwww.kaggle.com%2Fcode%2Fmohamed08%2Fexploratory-data-analysis-for-uber-trips%3FscriptVersionId%3D3829661"
+          title="Exploratory data analysis for Uber trips" />
+
+
+  
+    
+
+
+    <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==">window['useKaggleAnalytics'] = true;</script>
+
+  <script id="gapi-target" nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" src="https://apis.google.com/js/api.js" defer
+    async></script>
+  <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" src="/static/assets/runtime.js?v=cb3e4fb8075d1b6c9167" data-turbolinks-track="reload"></script>
+  <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" src="/static/assets/vendor.js?v=75079044483be270a051" data-turbolinks-track="reload"></script>
+  <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" src="/static/assets/app.js?v=68bda8cf9010437a64b3" data-turbolinks-track="reload"></script>
+    <script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" type="text/javascript">
+      window.kaggleStackdriverConfig = {
+        key: 'AIzaSyA4eNqUdRRskJsCZWVz-qL655Xa5JEMreE',
+        projectId: 'kaggle-161607',
+        service: 'web-fe',
+        version: 'ci',
+        userId: '0'
+      }
+    </script>
+</head>
+
+<body data-turbolinks="false">
+  <main>
+    
+
+
+
+
+
+<div id="site-container"></div>
+
+<div id="site-body" class="hide">
+    
+
+
+
+
+<div data-component-name="KernelViewerMaterialContainer" style="display: flex; flex-direction: column; flex: 1 0 auto;"></div><script class="kaggle-component" nonce="e52JZ5Q5Q7t8vgWBX7AaRA==">var Kaggle=window.Kaggle||{};Kaggle.State=Kaggle.State||[];Kaggle.State.push({"kernel":{"id":972622,"title":"Exploratory data analysis for Uber trips","currentRunId":3829661,"mostRecentRunId":3829661,"url":"/code/mohamed08/exploratory-data-analysis-for-uber-trips","tags":[{"name":"exploratory data analysis","slug":"eda","url":"/tags/eda"},{"name":"data visualization","slug":"data-visualization","url":"/tags/data-visualization"}],"upvoteCount":33,"viewCount":28059,"forkCount":366,"author":{"id":1132925,"displayName":"Mohamed TaG","userName":"mohamed08","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/1132925-fb.jpg","profileUrl":"/mohamed08"},"updatedTime":"2018-05-30T15:55:44.123333300Z","selfLink":"/kernels/972622","dockerImagePinningType":"DOCKER_IMAGE_PINNING_TYPE_ORIGINAL","medal":"BRONZE","topicId":129091,"slug":"exploratory-data-analysis-for-uber-trips","canToggleVisibility":true},"kernelRun":{"id":3829661,"kernelId":972622,"status":"COMPLETE","kernelVersionType":"BATCH","sourceType":"EDITOR_TYPE_NOTEBOOK","language":"LANGUAGE_PYTHON","title":"Exploratory data analysis for Uber trips","dateCreated":"2018-05-30T15:55:43.493Z","dateEvaluated":"2018-05-30T15:55:44.123Z","workerUptimeSeconds":1013930,"workerIpAddress":"172.16.9.2     ","scriptLanguageId":9,"scriptLanguageName":"IPython Notebook HTML","renderedOutputUrl":"https://www.kaggleusercontent.com/kf/3829661/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..ISkZq4No3yTRjMtNzJGWdA.Lr0fHH4Zvnu0pRO3FxIKkuIByYcFsDELIQHZh7ii5e7JPytSDn3TLqvX_QbVpSO5WUAfcdhEdjl8m6TNO6kzoaYj_Al-aOPtzTX88HYtw3HXRR9pLX3icG2vATmIjeRttqVrltu_sSjnCJ7mn6y9BdGpYEoTet-_MvS6OizsjFI2INg746OrNdnLsMRJD52RiihwHBV25IoGotETU_-nbeoe-fLo8bcvL1PxIxoKAVVtHBoHK54a6tHcrF0VTGvFCCo1WDHAb2hrmqCESzG7MJNvs5n26wZOHyII7XToCEVZbk-nJtKFZr6fdi-pz2lPqTlKp7hlLRyOIbEz8jN0aXihXrci9zFnQ6pO0W_7BTHdhkZyVwyW2cp109he8rEjVzL4MBmYrA5293r3oD5MIXOMixrMVw0rNgv6ZbVLrAtWggWyTrJFbd4uSP0y1xLNDC-pxFmaM561mVYys-lfxXVc253XfRK5H7NrtBhTyi6T1JIQmXOc-OxDQvTAtaU-sauVmhGsyLORt_gbyi4f5i9EENtMXlTiYsYEC5i-haGLZcQnhYrgcgdcbFWe6KISL0fmzvSwb4LVQ-w_hLeoVtJLR2wGOo8_tuyVT1PZA1-sjrLczoZv4SR4PvQygZAs9_iQUC3Q5MT-vP_aDTt7xpGqc3TW-zURxrrqKN98xe5DZSkZqpQnKD3ClnKNLfYw.hfVqfN-secsyWZj2FZ-Inw/__results__.html?sharingControls=true","isolatorResults":"\u003Cresults\u003E\u003Cdisk_kb_free\u003E944968\u003C/disk_kb_free\u003E\u003Cdocker_image_digest\u003E6dd711c2b4a1cb394f9c16db1697f54f27d5fad7a1dd4c596d3042209a5db80d\u003C/docker_image_digest\u003E\u003Cdocker_image_id\u003Esha256:e39b0c725c6ea95b65ac08ce0b83567873d64f5be033e681ba2d1b2f0e38dcd1\u003C/docker_image_id\u003E\u003Cdocker_image_name\u003Egcr.io/kaggle-images/python\u003C/docker_image_name\u003E\u003Cexit_code\u003E0\u003C/exit_code\u003E\u003Cfailure_message /\u003E\u003Cinvalid_path_errors\u003EFalse\u003C/invalid_path_errors\u003E\u003Cout_of_memory\u003EFalse\u003C/out_of_memory\u003E\u003Crun_time_seconds\u003E16.3417090430157\u003C/run_time_seconds\u003E\u003Csucceeded\u003ETrue\u003C/succeeded\u003E\u003Ctimeout_exceeded\u003EFalse\u003C/timeout_exceeded\u003E\u003Cused_all_space\u003EFalse\u003C/used_all_space\u003E\u003Cwas_killed\u003EFalse\u003C/was_killed\u003E\u003C/results\u003E","runInfo":{"dockerfileUrl":"https://github.com/Kaggle/docker-python/blob/main/Dockerfile.tmpl","dockerHubUrl":"https://gcr.io/kaggle-images/python","dockerImageDigest":"6dd711c2b4a1cb394f9c16db1697f54f27d5fad7a1dd4c596d3042209a5db80d","dockerImageId":"sha256:e39b0c725c6ea95b65ac08ce0b83567873d64f5be033e681ba2d1b2f0e38dcd1","dockerImageName":"gcr.io/kaggle-images/python","diskKbFree":944968,"failureMessage":"","runTimeSeconds":16.3417090430157,"succeeded":true},"dockerImageVersionId":3200,"dataSources":[{"sourceType":"DATA_SOURCE_TYPE_DATASET_VERSION","sourceId":1855,"datasetId":1026,"mountSlug":""}],"authorUserId":1132925,"kernelVersionNumber":4},"author":{"id":1132925,"displayName":"Mohamed TaG","userName":"mohamed08","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/1132925-fb.jpg","profileUrl":"/mohamed08"},"baseUrl":"/code/mohamed08/exploratory-data-analysis-for-uber-trips","collaborators":{"owner":{"userId":1132925,"profileUrl":"/mohamed08","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/1132925-fb.jpg","name":"Mohamed TaG","slug":"mohamed08","type":"OWNER"}},"initialTab":"input","ouputFilesOwnerInfo":{"kernel":{"kernelId":972622,"kernelVersionId":3829661,"scope":"mohamed08/exploratory-data-analysis-for-uber-trips"}},"dataSources":[{"sourceType":"DATA_SOURCE_TYPE_DATASET_VERSION","sourceId":1855,"datasetId":1026,"mountSlug":""}],"renderableDataSources":[{"reference":{"sourceType":"DATA_SOURCE_TYPE_DATASET_VERSION","sourceId":1855,"mountSlug":""},"name":"My Uber Drives","dataSourceUrl":"/datasets/zusmani/uberdrives","thumbnailUrl":"https://storage.googleapis.com/kaggle-datasets-images/1026/1855/c5798b10623c348175e83b18ff8cfb14/dataset-thumbnail.jpg"}],"versions":[{"id":3829661,"isNotebook":true,"languageName":"Python","lastRunTime":"2018-05-30T15:55:43.493Z","linesDeletedFromPrevious":2,"linesInsertedFromPrevious":11,"runInfo":{"dockerfileUrl":"https://github.com/Kaggle/docker-python/blob/master/Dockerfile","dockerHubUrl":"https://registry.hub.docker.com/u/kaggle/python/","dockerImageId":"sha256:e39b0c725c6ea95b65ac08ce0b83567873d64f5be033e681ba2d1b2f0e38dcd1","dockerImageName":"gcr.io/kaggle-images/python","failureMessage":"","isValidStatus":true,"runTimeSeconds":16.3417090430157,"succeeded":true,"usedAllSpace":false},"status":"COMPLETE","title":"Exploratory data analysis for Uber trips","url":"/mohamed08/exploratory-data-analysis-for-uber-trips?scriptVersionId=3829661","versionNumber":4,"hasVersionNumber":true,"versionType":"BATCH"},{"id":3829497,"isNotebook":true,"languageName":"Python","lastRunTime":"2018-05-30T15:41:09.743Z","runInfo":{"dockerfileUrl":"https://github.com/Kaggle/docker-python/blob/master/Dockerfile","dockerHubUrl":"https://registry.hub.docker.com/u/kaggle/python/","dockerImageId":"sha256:e39b0c725c6ea95b65ac08ce0b83567873d64f5be033e681ba2d1b2f0e38dcd1","dockerImageName":"gcr.io/kaggle-images/python","failureMessage":"","isValidStatus":true,"runTimeSeconds":14.3251923640491,"succeeded":true,"usedAllSpace":false},"status":"COMPLETE","title":"Exploratory data analysis for Uber trips","url":"/mohamed08/exploratory-data-analysis-for-uber-trips?scriptVersionId=3829497","versionNumber":3,"hasVersionNumber":true,"versionType":"BATCH"},{"id":3590412,"isNotebook":true,"languageName":"Python","lastRunTime":"2018-05-12T17:44:41.470Z","runInfo":{"dockerfileUrl":"https://github.com/Kaggle/docker-python/blob/master/Dockerfile","dockerHubUrl":"https://registry.hub.docker.com/u/kaggle/python/","dockerImageId":"sha256:460889302c794dcc96ad587ac9ffdb4188634972cd4085123f9c24dbf4455811","dockerImageName":"gcr.io/kaggle-images/python","failureMessage":"","isValidStatus":true,"runTimeSeconds":9.05066000507213,"succeeded":true,"usedAllSpace":false},"status":"COMPLETE","title":"Quick Exploratory Data Analysis using python","url":"/mohamed08/exploratory-data-analysis-for-uber-trips?scriptVersionId=3590412","versionNumber":2,"hasVersionNumber":true,"versionType":"BATCH"},{"id":3590392,"isNotebook":true,"languageName":"Python","lastRunTime":"2018-05-12T17:41:40.927Z","linesInsertedFromPrevious":96,"runInfo":{"dockerfileUrl":"https://github.com/Kaggle/docker-python/blob/master/Dockerfile","dockerHubUrl":"https://registry.hub.docker.com/u/kaggle/python/","dockerImageId":"sha256:460889302c794dcc96ad587ac9ffdb4188634972cd4085123f9c24dbf4455811","dockerImageName":"gcr.io/kaggle-images/python","failureMessage":"","isValidStatus":true,"runTimeSeconds":11.2281098309904,"succeeded":true,"usedAllSpace":false},"status":"COMPLETE","title":"Quick EDA ","url":"/mohamed08/exploratory-data-analysis-for-uber-trips?scriptVersionId=3590392","versionNumber":1,"hasVersionNumber":true,"versionType":"BATCH"}],"downloadAllFilesUrl":"/code/svzip/3829661","menuLinks":[{"href":"/code/mohamed08/exploratory-data-analysis-for-uber-trips/code","tab":"code","text":"Code","title":"Code"},{"href":"/code/mohamed08/exploratory-data-analysis-for-uber-trips/notebook","tab":"notebook","text":"Notebook","title":"Notebook"},{"href":"/code/mohamed08/exploratory-data-analysis-for-uber-trips/execution","showOnMobile":false,"tab":"execution","text":"Execution Info","title":"Execution Info"},{"href":"/code/mohamed08/exploratory-data-analysis-for-uber-trips/log","showOnMobile":false,"tab":"log","text":"Log","title":"Log"},{"count":0,"href":"/code/mohamed08/exploratory-data-analysis-for-uber-trips/data","tab":"data","text":"Input","title":"Input"},{"count":6,"href":"/code/mohamed08/exploratory-data-analysis-for-uber-trips/comments","showZeroCountExplicitly":true,"tab":"comments","text":"Comments","title":"Comments"}],"callToAction":{"href":"/code/fork-version/3829661","reportEventCategory":"kernels","reportEventType":"anonymousKernelForkCreation","text":"Fork Notebook","title":"Fork Notebook"},"voteButton":{"totalVotes":33,"medalVotes":5,"canUpvote":true,"voters":[{"id":595533,"displayName":"Haseeb Elahi","userName":"helahi","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/595533-gr.jpg","profileUrl":"/helahi"},{"id":1174808,"displayName":"saichawan","userName":"saichawan","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/saichawan"},{"id":1217535,"displayName":"Manoj Mone","userName":"manojmone","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/1217535-gp.jpg","profileUrl":"/manojmone"},{"id":2104949,"displayName":"Kuljinder","userName":"kuljinder","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/2104949-fb.jpg","profileUrl":"/kuljinder"},{"id":2714056,"displayName":"Murali","userName":"firstflee","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/2714056-kg.JPG","profileUrl":"/firstflee","performanceTier":"CONTRIBUTOR"},{"id":4049324,"displayName":"Gaganjot Kaur","userName":"gaganjotkaur","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/gaganjotkaur"},{"id":4755215,"displayName":"Abdullah Younis","userName":"abdullahhosam","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/4755215-kg.jpg","profileUrl":"/abdullahhosam","performanceTier":"CONTRIBUTOR"},{"id":5231468,"displayName":"Manik Mondal","userName":"manikmondal","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/5231468-kg.jpg","profileUrl":"/manikmondal"},{"id":5484591,"displayName":"Mahmoud Eldesuky","userName":"mahmoudeldesuky","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/5484591-kg.jpg","profileUrl":"/mahmoudeldesuky","performanceTier":"CONTRIBUTOR"},{"id":5837874,"displayName":"Monisha Monisha","userName":"monishamonisha","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/monishamonisha"},{"id":5847375,"displayName":"B.Sangeethababu","userName":"bsangeethababu","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/bsangeethababu"},{"id":6270687,"displayName":"PhoneixHP","userName":"phoneixhp","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/phoneixhp"},{"id":6318507,"displayName":"Vijay tech","userName":"vijaytech","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/vijaytech"},{"id":6539968,"displayName":"Aparna_Mishra","userName":"aparnamshr","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/aparnamshr"},{"id":6629424,"displayName":"potlapalli rohit Kumar","userName":"potlapallirohitkumar","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/potlapallirohitkumar"},{"id":6944053,"displayName":"Ahmed EL HAJOUTI","userName":"ahmedelhajouti","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/ahmedelhajouti"},{"id":7195180,"displayName":"pratima patil","userName":"pratimapatil","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/pratimapatil"},{"id":7198766,"displayName":"Sebitdawan","userName":"sebitdawan","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/sebitdawan"},{"id":7458980,"displayName":"Seemab Kanwal","userName":"seemabkanwal","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/7458980-kg.png","profileUrl":"/seemabkanwal","performanceTier":"CONTRIBUTOR"},{"id":7542496,"displayName":"Daisy grace","userName":"daisygrace","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/daisygrace"},{"id":7816171,"displayName":"Anil Lava kumar","userName":"anillavakumar","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/anillavakumar"},{"id":7858187,"displayName":"Ndugatuda Maxwell","userName":"ndugatudamaxwell","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/ndugatudamaxwell"},{"id":9826609,"displayName":"Upanshu","userName":"upanshu","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/upanshu"},{"id":10030745,"displayName":"Saurabh Deokate","userName":"saurabhdeokate","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/saurabhdeokate"},{"id":10078024,"displayName":"Yasir Raza","userName":"yasirabdaali","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/10078024-kg.jpg","profileUrl":"/yasirabdaali","performanceTier":"EXPERT"},{"id":10212223,"displayName":"Sudarshan Aghade","userName":"sudarshanaghade","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/sudarshanaghade"},{"id":11135064,"displayName":"Ajay Bende","userName":"ajaybende","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/ajaybende"},{"id":13012382,"displayName":"Spoorthi Suvarna","userName":"spoorthisuvarna","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/spoorthisuvarna"},{"id":15833030,"displayName":"Pragya1611","userName":"pragya1611","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/pragya1611"},{"id":16913949,"displayName":"vvvennila","userName":"vvvennila","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/vvvennila"},{"id":16915746,"displayName":"B. Jeyasri","userName":"bjeyasri","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/bjeyasri"},{"id":16920423,"displayName":"Nisha2004A","userName":"nisha2004a","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/nisha2004a"},{"id":16954797,"displayName":"Mohana priya R 1811","userName":"mohanapriyar1811","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/mohanapriyar1811"}],"showVoters":true,"alwaysShowVoters":true,"kernelId":972622},"showSharingControls":true,"moderationStatus":"PRIVATED_MODERATION_STATUS_NO_ABUSE"});performance && performance.mark && performance.mark("KernelViewerMaterialContainer.componentCouldBootstrap");</script>
+
+<form action="/code/mohamed08/exploratory-data-analysis-for-uber-trips/input" id="__AjaxAntiForgeryForm" method="post"><input name="X-XSRF-TOKEN" type="hidden" value="CfDJ8MNDZicIIV1FkFqrIKA-ArFIgO7eMH1-FvTTi-ji_vQM7exfXENVs13kp29hKBjwu70_e_1KWFcBu8E51HFB_ZAD0xPkp8JbhvzV6g9ul-Nn1g" /></form>
+<script nonce="e52JZ5Q5Q7t8vgWBX7AaRA==" type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+    preferredFont: "TeX",
+    availableFonts: ["STIX", "TeX"],
+    linebreaks: {
+    automatic: true
+    },
+    EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+    inlineMath: [["\\(", "\\)"], ["\\\\(", "\\\\)"]],
+    displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+    processEscapes: true,
+    ignoreClass: "tex2jax_ignore|dno"
+    },
+    TeX: {
+    noUndefined: {
+    attributes: {
+    mathcolor: "red",
+    mathbackground: "#FFEEEE",
+    mathsize: "90%"
+    }
+    }
+    },
+    Macros: {
+    href: "{}"
+    },
+    skipStartupTypeset: true,
+    messageStyle: "none",
+    extensions: ["Safe.js"],
+    });
+</script>
+<script type="text/javascript" nonce="e52JZ5Q5Q7t8vgWBX7AaRA==">
+  window.addEventListener("DOMContentLoaded", () => {
+    const head = document.getElementsByTagName("head")[0];
+    const useProdHosts = ["www.kaggle.com", "admin.kaggle.com"];
+    const subdomain = useProdHosts.includes(window.location.hostname) ? "www" : "staging";
+
+    const lib = document.createElement("script");
+    lib.type = "text/javascript";
+    lib.src = `https://${subdomain}.kaggleusercontent.com/static/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML`;
+    head.appendChild(lib);
+  });
+</script>
+
+
+</div>
+
+
+
+
+  </main>
+</body>
+
+</html>
